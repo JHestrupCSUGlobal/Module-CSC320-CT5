@@ -1,0 +1,89 @@
+package module1;
+import java.util.Scanner;
+
+public class Module5CT {
+	public static void main(String[] args) {
+		
+		Scanner scnr = new Scanner(System.in);
+		
+		// Array for months and temperatures
+		String[] months = {
+				"January", "February", "March", "April", 
+				"May", "June", "July", "August",
+	            "September", "October", "November", "December"
+	        };
+		
+		double[] monthlyTemp = new double[12];
+		
+		//Gather user input for temperatures in Fahrenheit
+		System.out.println("Please enter the average temperature for each month in Fahrenheit:");
+		for(int i = 0; i < 12; i++) {
+			System.out.print(months[i] + ": ");
+			monthlyTemp[i] = scnr.nextDouble();
+		}
+		
+		// Main loop
+		while (true) {
+			System.out.println("Please enter a month name to view the temperature or type year for yearly statistics on the weather. Type exit to quit.");
+			String input = scnr.next();
+			if (input.equalsIgnoreCase("exit")) {
+				System.out.println("Exiting program now.");
+				break;
+			}
+			
+			//Display yearly temperature statistics
+			if (input.equalsIgnoreCase("year")) {
+				double total = 0;
+				double max = monthlyTemp[0];
+				double min = monthlyTemp[0];
+				int maxIndex = 0, minIndex = 0;
+				
+				System.out.println("Monthly Temperatures");
+				for (int i = 0; i < months.length; i++) {
+					System.out.println(months[i] + ": " + monthlyTemp[i] + "°F");
+					total += monthlyTemp[i];
+					
+				if(monthlyTemp [i] > max) {
+					max = monthlyTemp[i];
+					maxIndex = i;
+				}
+				if(monthlyTemp[i] < min) {
+					min = monthlyTemp[i];;
+					minIndex = i;
+				}
+			}
+				
+			double yearlyAverage = total / months.length;
+			System.out.printf("\nYearly average temperature: %.2f°F\n", yearlyAverage);
+			System.out.println("Highest temperature: " + months[maxIndex] + " with " + max + "°F");
+			System.out.println("Lowest temperature: " + months[minIndex] + " with " + min + "°F");
+			
+			} else {
+				//Display specific month temperatures
+				boolean found = false;
+				
+				for (int i = 0; i < months.length; i++) {
+					if (months[i].equalsIgnoreCase(input)) {
+						System.out.println(months[i] + " temperature: " + monthlyTemp[i] + "°F");
+						found = true;
+						break;
+					}
+				}
+				
+				if (!found) {
+					System.out.println("Invlaid month entered. Please try again.");
+				}
+				
+			
+				
+				}
+			}
+				
+		}
+		
+		
+	}
+
+		
+	
+	
